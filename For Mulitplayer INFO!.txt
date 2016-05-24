@@ -1,3 +1,26 @@
+Når der genereres Visual Studio filer overskrives vigtig MP Funktionalitet! (Altså når man laver en packed build af spillet!)
+- Dette er kun på din egen maskine og det kommer ikke med over på andres, før de genererer nye filer
+
+
+Åben .sln Filen til projektet find i stien her
+Games/RTSGame/Source/RTSGame/RTSGame.Build.cs
+
+To linjer der er vigtige
+	Default
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
+
+		PrivateDependencyModuleNames.AddRange(new string[] { });
+
+	Forventet!
+
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "OnlineSubsystemNull" });
+
+		PrivateDependencyModuleNames.AddRange(new string[] { "OnlineSubsystem", "OnlineSubsystemNull" });
+
+
+Filen burde se således ud (Cirka. Medmindre der er tilføjet andet end Online lignende ting skal de selvfølgelig også med!)
+
+
 // Fill out your copyright notice in the Description page of Project Settings.
 
 using UnrealBuildTool;
@@ -24,3 +47,4 @@ public class RTSGame : ModuleRules
 		// }
 	}
 }
+
