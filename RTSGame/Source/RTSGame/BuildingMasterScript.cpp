@@ -3,7 +3,6 @@
 #include "RTSGame.h"
 #include "BuildingMasterScript.h"
 
-
 // Sets default values for this component's properties
 UBuildingMasterScript::UBuildingMasterScript()
 {
@@ -14,7 +13,6 @@ UBuildingMasterScript::UBuildingMasterScript()
 
 	// ...
 }
-
 
 // Called when the game starts
 void UBuildingMasterScript::BeginPlay()
@@ -47,10 +45,13 @@ void UBuildingMasterScript::BuildBuilding(float DeltaTime)
 	BuildLerpTime = (DeltaTime / BuildTime) + BuildLerpTime;
 	BuildTimeCounter = DeltaTime + BuildTimeCounter;
 	FVector lerp = FMath::Lerp(FVector(BuildLerpPosition + BuildOffset), BuildLerpPosition, BuildLerpTime);
+	//GEngine->AddOnScreenDebugMessage(-1, 1.0, FColor::Red, lerp.ToString());
 	GetOwner()->SetActorLocation(lerp, false, false, ETeleportType::None);
 
 	if (BuildTime < BuildTimeCounter)
 	{
+		FVector finalpos = FVector(lerp.X, lerp.Y, 0);
+		GetOwner()->SetActorLocation((finalpos), false, false, ETeleportType::None);
 		IsBuilding = false;
 	}
 }
@@ -64,6 +65,5 @@ void UBuildingMasterScript::BuildUnit(float DeltaTime)
 		myUnitToBuild->GetActor()->SetActorLocation(SpawnPoint->GetComponentLocation());
 		myUnitToBuild = nullptr;
 		IsBuildingUnit = false;
-		GEngine->AddOnScreenDebugMessage(-1, 1.0, FColor::Red, "unit done");
 	}
 }

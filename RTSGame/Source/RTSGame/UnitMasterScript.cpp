@@ -11,7 +11,6 @@ UUnitMasterScript::UUnitMasterScript()
 	// off to improve performance if you don't need them.
 	bWantsBeginPlay = true;
 	PrimaryComponentTick.bCanEverTick = true;
-
 	// ...
 }
 
@@ -24,7 +23,6 @@ void UUnitMasterScript::BeginPlay()
 	// ...
 	
 }
-
 
 // Called every frame
 void UUnitMasterScript::TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction )
