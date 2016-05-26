@@ -36,5 +36,7 @@ public:
 	
 	UFUNCTION(BlueprintCallable, Category = "GraphicQuality")
 		virtual void SetQuality(int qualityLevel);
+	UFUNCTION(BlueprintCallable, Category = "GraphicQuality")
+		virtual int GetQuality();
 	
 };

@@ -131,4 +131,12 @@ void UMenuCPP::SetQuality(int qualityLevel)
 	MyGameSettings->SetShadowQuality(qualityLevel);
 	MyGameSettings->SetTextureQuality(qualityLevel);
 	MyGameSettings->SetVisualEffectQuality(qualityLevel);
+
+	MyGameSettings->ApplySettings(false);
+}
+int UMenuCPP::GetQuality()
+{
+	UGameUserSettings* MyGameSettings = GEngine->GetGameUserSettings(); //Defines the GameUserSettings
+
+	return MyGameSettings->GetAntiAliasingQuality(); //Returning a single of the settings as they've set together through code (Not checked)
 }
