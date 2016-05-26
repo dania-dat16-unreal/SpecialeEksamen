@@ -90,6 +90,7 @@ void UMenuCPP::GetScreenSettings()
 
 		FIntPoint tmpResolution = MyGameSettings->GetScreenResolution(); //Temp value for checking
 
+		
 		//Prepares resolution variable to be used when instantiating options menu
 		if (tmpResolution == FIntPoint(800, 600))
 		{
