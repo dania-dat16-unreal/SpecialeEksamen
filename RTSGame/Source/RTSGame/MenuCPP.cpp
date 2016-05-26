@@ -34,11 +34,15 @@ void UMenuCPP::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 	// ...
 }
 
+
+//https://answers.unrealengine.com/questions/51623/how-to-fullscreen-packaged-build.html - Helped finding commands for Screen altering.
+
+//Sets the screen values based on the options menu after clicking apply.
 void UMenuCPP::ApplyScreenSettings(FString resolution, bool fullscreen, bool vsync)
 {
 	if (GEngine)
 	{
-		UGameUserSettings* MyGameSettings = GEngine->GetGameUserSettings();
+		UGameUserSettings* MyGameSettings = GEngine->GetGameUserSettings(); //Defines the GameUserSettings
 
 		//Setting Resolution
 		if (resolution == "800x600")
@@ -77,14 +81,16 @@ void UMenuCPP::ApplyScreenSettings(FString resolution, bool fullscreen, bool vsy
 	}
 }
 
+//Gets the Screen values for setting the options visual values e.g. Checkboxes based on the current values.
 void UMenuCPP::GetScreenSettings()
 {
 	if (GEngine)
 	{
-		UGameUserSettings* MyGameSettings = GEngine->GetGameUserSettings();
+		UGameUserSettings* MyGameSettings = GEngine->GetGameUserSettings(); //Defines the GameUserSettings
 
-		FIntPoint tmpResolution = MyGameSettings->GetScreenResolution();
+		FIntPoint tmpResolution = MyGameSettings->GetScreenResolution(); //Temp value for checking
 
+		//Prepares resolution variable to be used when instantiating options menu
 		if (tmpResolution == FIntPoint(800, 600))
 		{
 			resolutionOptionCPP = "800x600";
@@ -98,8 +104,9 @@ void UMenuCPP::GetScreenSettings()
 			resolutionOptionCPP = "1280x800";
 		}
 
-		int tmpFullscreen = MyGameSettings->GetFullscreenMode();
+		int tmpFullscreen = MyGameSettings->GetFullscreenMode(); //Temp value of the current mode
 
+		//Prepares fulldscreen variable to be used when instantiating options menu
 		if (tmpFullscreen == 0)
 		{
 			fullscreenCPP = true;
@@ -108,6 +115,20 @@ void UMenuCPP::GetScreenSettings()
 		{
 			fullscreenCPP = false;
 		}
-		vsyncCPP = MyGameSettings->IsVSyncEnabled();
+		
+		vsyncCPP = MyGameSettings->IsVSyncEnabled(); //Gets the current state of vsync and sets the variable.
 	}
+}
+
+//https://docs.unrealengine.com/latest/INT/Engine/Performance/Scalability/ScalabilityReference/
+void UMenuCPP::SetQuality(int qualityLevel)
+{
+	UGameUserSettings* MyGameSettings = GEngine->GetGameUserSettings(); //Defines the GameUserSettings
+
+	//Sets the largest graphics groups to the level chosen, could have been done on individual buttons, but made it simple with a single button :) (Level 3 is Default)
+	MyGameSettings->SetAntiAliasingQuality(qualityLevel);
+	MyGameSettings->SetPostProcessingQuality(qualityLevel);
+	MyGameSettings->SetShadowQuality(qualityLevel);
+	MyGameSettings->SetTextureQuality(qualityLevel);
+	MyGameSettings->SetVisualEffectQuality(qualityLevel);
 }

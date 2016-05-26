@@ -33,6 +33,8 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "ScreenSettings")
 		virtual void GetScreenSettings();
-
+	
+	UFUNCTION(BlueprintCallable, Category = "GraphicQuality")
+		virtual void SetQuality(int qualityLevel);
 	
 };
